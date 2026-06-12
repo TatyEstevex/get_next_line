@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tde-alme <tde-alme@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: tde-alme <tde-alm@student.42porto.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/06/02 14:58:27 by tde-alme          #+#    #+#             */
-/*   Updated: 2026/06/06 20:18:43 by tde-alme         ###   ########.fr       */
+/*   Created: 2026/06/12 10:24:39 by tde-alme          #+#    #+#             */
+/*   Updated: 2026/06/12 16:58:51 by tde-alme         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,12 @@ size_t	ft_strlen(const char *s)
 	size_t	i;
 
 	i = 0;
-	while(s[i])
+	while (s[i])
 		i++;
 	return (i);
 }
 
-char *ft_strchr(const char *s, int c)
+char	*ft_strchr(const char *s, int c)
 {
 	size_t	i;
 
@@ -32,47 +32,51 @@ char *ft_strchr(const char *s, int c)
 	while (s[i] && (s[i] != c))
 		i++;
 	if (s[i] == c)
-		return ((char *)&s[i]);	
+		return ((char *)&s[i]);
 	return (NULL);
 }
+
 char	*ft_strjoin(char *str1, char *str2)
 {
 	size_t	i;
 	char	*res;
 	size_t	r;
-	char	*to_free;
 
 	i = 0;
 	r = 0;
-	to_free = str1;
-	if (!str1)
-		str1 = "";
 	if (!str2)
 		return (NULL);
-	res = malloc(ft_strlen(str1) + ft_strlen(str2) + 1);
+	if (!str1)
+	{
+		str1 = malloc(1 * sizeof(char));
+		if (!str1)
+			return (NULL);
+		str1[0] = '\0';
+	}
+	res = malloc((ft_strlen(str1) + ft_strlen(str2) + 1) * sizeof(char));
 	if (!res)
-		return (NULL);
-    while (str1[i])
-        res[r++] = str1[i++]; 
-    i = 0;
-    while (str2[i])
-        res[r++] = str2[i++];
+		return (free(str1), NULL);
+	while (str1[i])
+		res[r++] = str1[i++];
+	i = 0;
+	while (str2[i])
+		res[r++] = str2[i++];
 	res[r] = '\0';
-   	free(to_free);
-	return (res);
+	return (free(str1), res);
 }
+
 char	*ft_substr(char *str, unsigned int start, size_t len)
 {
-	size_t		i;
+	size_t	i;
 	char	*res;
 
 	i = 0;
 	if (!str)
 		return (NULL);
-	res = malloc (len + 1);
+	res = malloc((len + 1) * sizeof(char));
 	if (!res)
 		return (NULL);
-	while(str[i] && (i < len))
+	while (str[i] && (i < len))
 	{
 		res[i] = str[start];
 		i++;
@@ -81,4 +85,3 @@ char	*ft_substr(char *str, unsigned int start, size_t len)
 	res[i] = '\0';
 	return (res);
 }
-
