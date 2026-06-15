@@ -6,6 +6,8 @@
 
 `get_next_line` is a C function that reads and returns one line at a time from any file descriptor — a file, standard input, or a network socket. Each successive call picks up exactly where the last one left off, until the file descriptor is exhausted or an error occurs.
 
+`get_next_line_bonus` does the same as get_next_line fuctions, but supports multiple file descriptors.
+
 **Goal:** implement a reliable, memory-safe line reader that works correctly for any `BUFFER_SIZE` value (1 byte up to tens of thousands), across multiple file descriptors, without leaking memory.
 
 **Prototype:**
